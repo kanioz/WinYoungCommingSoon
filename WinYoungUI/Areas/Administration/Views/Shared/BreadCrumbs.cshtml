@@ -1,0 +1,15 @@
+﻿@{
+    var crumbs = (Dictionary<string, string>) ViewBag.BreadCrumbs; 
+}
+<ol class="breadcrumb">
+    <li><a href="#"><i class="fa fa-dashboard"></i> Admin Panel</a></li>
+    @if (crumbs != null)
+    {
+        foreach (var item in crumbs)
+        {
+            <li><a href="@item.Value">@item.Key</a></li>
+        }
+    }
+
+    <li class="active">@ViewBag.Title</li>
+</ol>

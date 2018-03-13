@@ -1,0 +1,18 @@
+﻿@model string
+<script src="/Areas/Administration/Content/plugins/ckeditor/ckeditor.js"></script>
+<script src="/content/ckfinder/ckfinder.js"></script>
+<script>
+    $(document).ready(function () {
+        CKEDITOR.replace("@Model", {
+            enterMode: CKEDITOR.ENTER_BR,
+            filebrowserBrowseUrl: '/content/ckfinder/ckfinder.html',
+            filebrowserImageBrowseUrl: '/content/ckfinder/ckfinder.html?type=Images',
+            filebrowserUploadUrl: '/content/ckfinder/connector?command=QuickUpload&type=Files',
+            filebrowserImageUploadUrl: '/content/ckfinder/connector?command=QuickUpload&type=Images'
+        });
+        CKEDITOR.skinName = 'moonocolor';
+        CKEDITOR.language = 'tr';
+        CKEDITOR.config.pasteFromWordRemoveFontStyles = false;
+        //CKFinder.setupCKEditor(null, '/content/ckfinder/');
+    });
+</script>

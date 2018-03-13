@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
-using DbContext = Microsoft.EntityFrameworkCore.DbContext;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using WinYoungUI.Models.Entities;
 
 namespace WinYoungUI.Models
 {
-    public class WinYoungContext : DbContext
+    public class WinYoungContext : IdentityDbContext<User>
     {
         public WinYoungContext(DbContextOptions<WinYoungContext> options) : base(options)
         {
@@ -15,7 +16,7 @@ namespace WinYoungUI.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<NewsLetter>().ToTable("NewsLetter");
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

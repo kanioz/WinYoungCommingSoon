@@ -1,0 +1,12 @@
+﻿<link href="/Areas/Administration/Content/plugins/imageUploader/css/demo.html5imageupload.css?v1.3" rel="stylesheet">
+<script src="/Areas/Administration/Content/plugins/imageUploader/js/html5imageupload.min.js?v1.4.3"></script>
+<script>
+    $(document).ready(function () {
+        $('.dropzone').html5imageupload({
+            onAfterProcessImage: function () {
+                var base64 = document.getElementById("canvas_thumb").toDataURL("image/jpeg", "1.0");
+                $("#thumbnail").val(base64);
+            }
+        });
+    });
+</script>
