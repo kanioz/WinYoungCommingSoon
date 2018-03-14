@@ -6,6 +6,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json.Serialization;
+using WinYoungUI.Data.Repository;
+using WinYoungUI.Data.Service.Implementation;
+using WinYoungUI.Data.Service.Interface;
 using WinYoungUI.Models;
 using WinYoungUI.Models.Entities;
 
@@ -37,7 +40,9 @@ namespace WinYoungUI
 
             services.AddMvc();
 
+            services.AddScoped(typeof(GenericRepository<>));
             services.AddScoped<IDbInitializer, DbInitializer>();
+            services.AddScoped<INewsLetterService, NewsLetterService>();
 
             services.ConfigureApplicationCookie(options =>
             {

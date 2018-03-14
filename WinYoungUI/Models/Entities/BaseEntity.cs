@@ -7,7 +7,7 @@ namespace WinYoungUI.Models.Entities
     {
         [Key]
         public int Id { get; set; }
+        public DateTime ModifiedTime { get; set; }
         public DateTime CreateTime { get; set; }
-        public bool IsDeleted { get; set; }
     }
 }

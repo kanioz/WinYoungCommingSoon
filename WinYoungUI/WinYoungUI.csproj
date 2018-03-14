@@ -18,10 +18,6 @@
   <ItemGroup>
     <Folder Include="Areas\Administration\Data\" />
     <Folder Include="wwwroot\Areas\Administration\Content\css\" />
-    <Folder Include="Data\Repository\Interface\" />
-    <Folder Include="Data\Repository\Implementation\" />
-    <Folder Include="Data\Service\Interface\" />
-    <Folder Include="Data\Service\Implementation\" />
     <Folder Include="Views\Shared\" />
   </ItemGroup>
 

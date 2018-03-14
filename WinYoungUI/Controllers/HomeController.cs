@@ -1,5 +1,7 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Logging;
+using WinYoungUI.Data.Service.Interface;
 using WinYoungUI.Models;
 using WinYoungUI.Models.Entities;
 using WinYoungUI.ViewModels;
@@ -8,10 +10,11 @@ namespace WinYoungUI.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly WinYoungContext _context;
-        public HomeController(WinYoungContext context)
+        private readonly INewsLetterService _newsLetterService;
+
+        public HomeController(INewsLetterService newsLetterService)
         {
-            _context = context;
+            _newsLetterService = newsLetterService;
         }
         public IActionResult Index()
         {
@@ -24,19 +27,15 @@ namespace WinYoungUI.Controllers
                 return new JsonResult(new {Saved = false, Message = "Enter valid email!"});
             try
             {
-                _context.NewsLetters.Add(new NewsLetter { CreateTime = DateTime.Now, Email = model.Email });
-                _context.SaveChanges();
+                _newsLetterService.AddEditNewsLetter(model);
                 return new JsonResult(new { Saved = true, Message = "Saved successfully" });
             }
             catch (Exception ex)
             {
+                LogHelper.LogExceptionMessage(ex);
                 return new JsonResult(new { Saved = false, Message = "An error occured while saving. Please try again later." });
             }
         }
-
-
-
-
     }
 }
 
