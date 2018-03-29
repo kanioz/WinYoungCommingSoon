@@ -27,6 +27,14 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "applicationUrl": "http://localhost:52183/"
+    },
+    "LocalIIS": {
+      "commandName": "IIS",
+      "launchBrowser": true,
+      "launchUrl": "http://localhost/wy",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
     }
   }
 }
