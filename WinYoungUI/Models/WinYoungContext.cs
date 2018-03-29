@@ -12,6 +12,7 @@ namespace WinYoungUI.Models
         }
 
         public DbSet<NewsLetter> NewsLetters { get; set; }
+        public DbSet<SiteSetting> SiteSettings { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

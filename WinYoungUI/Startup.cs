@@ -9,6 +9,7 @@ using Newtonsoft.Json.Serialization;
 using WinYoungUI.Data.Repository;
 using WinYoungUI.Data.Service.Implementation;
 using WinYoungUI.Data.Service.Interface;
+using WinYoungUI.Extensions;
 using WinYoungUI.Models;
 using WinYoungUI.Models.Entities;
 
@@ -41,8 +42,10 @@ namespace WinYoungUI
             services.AddMvc();
 
             services.AddScoped(typeof(GenericRepository<>));
+            services.AddSingleton<IPathProvider, PathProvider>();
             services.AddScoped<IDbInitializer, DbInitializer>();
             services.AddScoped<INewsLetterService, NewsLetterService>();
+            services.AddScoped<ISiteSettingService, SiteSettingService>();
 
             services.ConfigureApplicationCookie(options =>
             {

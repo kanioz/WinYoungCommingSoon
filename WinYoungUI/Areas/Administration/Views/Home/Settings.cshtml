@@ -1,0 +1,117 @@
+﻿@using Microsoft.IdentityModel.Protocols
+@using WinYoungUI.Extensions
+@model WinYoungUI.Models.Entities.SiteSetting
+@inject Microsoft.AspNetCore.Hosting.IHostingEnvironment hostingEnv
+<div class="box">
+    <div class="box-header with-border">
+        <div class="box box-primary">
+            <div class="box-header">
+                <h2>Site Ayarları</h2>
+            </div>
+            <div class="box-body">
+                <form role="form" method="POST">
+                    @Html.HiddenFor(t => t.Id)
+                    <input type="hidden" name="thumbnail" id="thumbnail" />
+
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="UserName">Site Başlığı</label>
+                            @Html.TextBoxFor(t => t.Title, new { @class = "form-control", placeholder = "Site Başlığı", @required = true, @oninvalid = "this.setCustomValidity('Lütfen \"Site Başlığı\" alanını giriniz.')", @oninput = "setCustomValidity('')" })
+                        </div>
+                        <div class="form-group">
+                            <label for="Name">Meta Anahtar Kelimeler</label>
+                            @Html.TextBoxFor(t => t.MetaKey, new { @class = "form-control", placeholder = "Meta Anahtar Kelimeler"})
+                        </div>
+                        <div class="form-group">
+                            <label for="MetaDescriptions">Meta Açıklamalar</label>
+                            @Html.TextAreaFor(t => t.MetaDesc, new { @class = "form-control", placeholder = "Meta Açıklamalar"})
+                        </div>
+                        <div class="form-group">
+                            <label for="Email">E-Posta Adresi</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                                @Html.TextBoxFor(t => t.Email, new {@class = "form-control", placeholder = "E-Posta", @requiered = true, @oninvalid = "this.setCustomValidity('Lütfen \"E-Posta Adresi\" alanını giriniz.')", @oninput = "setCustomValidity('')"})
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="Phone">Telefon</label>
+                            @Html.TextBoxFor(t => t.Phone, new {@class = "form-control", placeholder = "Telefon"})
+                        </div>
+                        <div class="form-group">
+                            <label for="GSM">Cep Telefonu</label>
+                            @Html.TextBoxFor(t => t.Mobile, new {@class = "form-control", placeholder = "Cep Telefonu"})
+                        </div>
+                        <div class="form-group">
+                            <label for="Adress">Adres</label>
+                            @Html.TextAreaFor(t => t.Adress, new { @class = "form-control", placeholder = "Adres" })
+                        </div>
+                        <div class="form-group">
+                            <label for="Map">Harita</label>
+                            @Html.TextAreaFor(t => t.Map, new { @class = "form-control", placeholder = "Harita" })
+                        </div>
+                        <div class="form-group">
+                            <label for="GoogleAnalytics">Google Analytics</label>
+                            @Html.TextAreaFor(t => t.GoogleAnalytics, new { @class = "form-control", placeholder = "Google Analytics" })
+                        </div>
+                        <div class="form-group">
+                            <label for="Facebook">Facebook</label>
+                            @Html.TextBoxFor(t => t.Facebook, new { @class = "form-control", placeholder = "Facebook" })
+                        </div>
+                        <div class="form-group">
+                            <label for="Twitter">Twitter</label>
+                            @Html.TextBoxFor(t => t.Twitter, new {@class = "form-control", placeholder = "Twitter" })
+                        </div>
+                        <div class="form-group">
+                            <label for="YouTube">YouTube</label>
+                            @Html.TextBoxFor(t => t.YouTube, new { @class = "form-control", placeholder = "YouTube" })
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="col-md-1">
+                            <div class="form-group">
+                                <label for="thumb">Logo</label>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="dropzone" data-image="@AttachmentOperations.GetImageLocation(hostingEnv, Model.Logo, Enums.AttachmentType.UserAvatar)" data-width="@Store.LogoSize.Split(',')[0]" data-ajax="false" data-download="true" data-height="@Store.LogoSize.Split(',')[1]">
+                                <input type="file" name="thumb" />
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <button style="width: 200px" class="pull-right btn btn-block btn-primary btn-lg">Kaydet</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section PageScripts
+    {
+    <!-- InputMask -->
+    <script src="~/Areas/Administration/Content/plugins/input-mask/jquery.inputmask.js" type="text/javascript"></script>
+    <script src="~/Areas/Administration/Content/plugins/input-mask/jquery.inputmask.date.extensions.js" type="text/javascript"></script>
+    <script src="~/Areas/Administration/Content/plugins/input-mask/jquery.inputmask.extensions.js" type="text/javascript"></script>
+
+    <script src="~/Areas/Administration/Content/plugins/tagsinput/bootstrap-tagsinput.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#MetaKeys').tagsinput({
+                items: '@Model.MetaKey',
+                tagClass: 'label label-primary'
+            });
+            $(".bootstrap-tagsinput").addClass('col-md-12');
+
+
+        });
+
+    </script>
+
+}
+@section PageStyles
+    {
+    <link href="~/Areas/Administration/Content/plugins/tagsinput/bootstrap-tagsinput.css" rel="stylesheet" />
+}

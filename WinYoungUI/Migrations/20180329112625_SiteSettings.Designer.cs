@@ -11,9 +11,10 @@ using WinYoungUI.Models;
 namespace WinYoungUI.Migrations
 {
     [DbContext(typeof(WinYoungContext))]
-    partial class WinYoungContextModelSnapshot : ModelSnapshot
+    [Migration("20180329112625_SiteSettings")]
+    partial class SiteSettings
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

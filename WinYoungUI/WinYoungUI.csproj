@@ -19,6 +19,13 @@
     <Folder Include="Areas\Administration\Data\" />
     <Folder Include="wwwroot\Areas\Administration\Content\css\" />
     <Folder Include="Views\Shared\" />
+    <Folder Include="wwwroot\Content\Uploads\" />
+    <Folder Include="wwwroot\Content\Uploads\ContentCategories\" />
+    <Folder Include="wwwroot\Content\Uploads\Contents\" />
+    <Folder Include="wwwroot\Content\Uploads\LibraryDocuments\" />
+    <Folder Include="wwwroot\Content\Uploads\UserAttachments\" />
+    <Folder Include="wwwroot\Content\Uploads\userAvatars\" />
+    <Folder Include="wwwroot\Content\Uploads\VideoCategories\" />
   </ItemGroup>
 
   <ItemGroup>

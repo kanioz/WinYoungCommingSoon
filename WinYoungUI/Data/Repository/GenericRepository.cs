@@ -69,6 +69,7 @@ namespace WinYoungUI.Data.Repository
 
         public virtual void Insert(TEntity entity)
         {
+            entity.CreateTime = DateTime.Now;
             DbSet.Add(entity);
         }
 
