@@ -74,7 +74,7 @@
                             </div>
                         </div>
                         <div class="col-md-5">
-                            <div class="dropzone" data-image="@AttachmentOperations.GetImageLocation(hostingEnv, Model.Logo, Enums.AttachmentType.UserAvatar)" data-width="@Store.LogoSize.Split(',')[0]" data-ajax="false" data-download="true" data-height="@Store.LogoSize.Split(',')[1]">
+                            <div class="dropzone" data-image="@AttachmentOperations.GetImageLocation(hostingEnv, Model.Logo, Enums.AttachmentType.Site)" data-width="@Store.LogoSize.Split(',')[0]" data-ajax="false" data-download="true" data-height="@Store.LogoSize.Split(',')[1]">
                                 <input type="file" name="thumb" />
                             </div>
                         </div>
@@ -109,7 +109,7 @@
         });
 
     </script>
-
+    @Html.Partial("Plugins/ImageUploader")
 }
 @section PageStyles
     {

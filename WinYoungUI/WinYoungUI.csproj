@@ -5,6 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\Content\Uploads\**" />
+    <Content Remove="wwwroot\Content\Uploads\**" />
+    <EmbeddedResource Remove="wwwroot\Content\Uploads\**" />
+    <None Remove="wwwroot\Content\Uploads\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="CoreCompat.System.Drawing" Version="1.0.0-beta006" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
     <PackageReference Include="Microsoft.AspNetCore.Razor" Version="2.0.1" />
@@ -19,13 +26,7 @@
     <Folder Include="Areas\Administration\Data\" />
     <Folder Include="wwwroot\Areas\Administration\Content\css\" />
     <Folder Include="Views\Shared\" />
-    <Folder Include="wwwroot\Content\Uploads\" />
-    <Folder Include="wwwroot\Content\Uploads\ContentCategories\" />
-    <Folder Include="wwwroot\Content\Uploads\Contents\" />
-    <Folder Include="wwwroot\Content\Uploads\LibraryDocuments\" />
-    <Folder Include="wwwroot\Content\Uploads\UserAttachments\" />
-    <Folder Include="wwwroot\Content\Uploads\userAvatars\" />
-    <Folder Include="wwwroot\Content\Uploads\VideoCategories\" />
+    <Folder Include="wwwroot\Content\" />
   </ItemGroup>
 
   <ItemGroup>

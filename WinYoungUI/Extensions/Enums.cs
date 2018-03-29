@@ -32,6 +32,7 @@ namespace WinYoungUI.Extensions
         }
         public enum AttachmentType
         {
+            Site,
             UserAvatar,
             ContentCategory,
             Content,

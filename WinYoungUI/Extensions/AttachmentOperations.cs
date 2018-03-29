@@ -47,6 +47,8 @@ namespace WinYoungUI.Extensions
         {
             switch (imageType)
             {
+                case Enums.AttachmentType.Site:
+                    return "Site";
                 case Enums.AttachmentType.Content:
                     return "Contents";
                 case Enums.AttachmentType.ContentCategory:
@@ -75,7 +77,7 @@ namespace WinYoungUI.Extensions
                 return noimage;
             }
             var folderName = GetFolderName(imageType);
-            var folderPath = hostingEnv.WebRootPath + "Content\\Uploads";
+            var folderPath = hostingEnv.WebRootPath + "\\Content\\Uploads";
             var path = Path.Combine(folderPath, folderName, fileName);
             var imagePath = string.Format("/Content/Uploads/{0}/{1}", folderName, fileName);
             return File.Exists(path) ? imagePath : noimage;
@@ -83,7 +85,7 @@ namespace WinYoungUI.Extensions
         public static string Save(Microsoft.AspNetCore.Hosting.IHostingEnvironment hostingEnv, byte[] fileBytes, string fileName, Enums.AttachmentType imageType)
         {
             var folderName = GetFolderName(imageType);
-            var folderPath = hostingEnv.WebRootPath + "Content\\Uploads";
+            var folderPath = hostingEnv.WebRootPath + "\\Content\\Uploads";
             var extension = new FileInfo(fileName).Extension;
             var fileNameExt = string.Format("{0}.{1}", new FileInfo(fileName).Name, extension);
             var path = Path.Combine(folderPath, folderName, fileNameExt);
@@ -93,9 +95,9 @@ namespace WinYoungUI.Extensions
         public static string Save(this Image image, Microsoft.AspNetCore.Hosting.IHostingEnvironment hostingEnv, string fileName, Enums.AttachmentType imageType)
         {
             var folderName = GetFolderName(imageType);
-            var folderPath = hostingEnv.WebRootPath + "Content\\Uploads";
+            var folderPath = @"Content\Uploads";
             var fileNameExt = string.Format("{0}_{1}.jpg", fileName, DateTime.Now.Millisecond);
-            var path = Path.Combine(folderPath, folderName, fileNameExt);
+            var path = Path.Combine(hostingEnv.WebRootPath, folderPath, folderName, fileNameExt);
             image.Save(path);
             return fileNameExt;
         }
