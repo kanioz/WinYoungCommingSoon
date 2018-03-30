@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ViewEngines;
 using WinYoungUI.Data.Service.Interface;
 using WinYoungUI.Extensions;
 using WinYoungUI.Models.Entities;
@@ -38,13 +32,13 @@ namespace WinYoungUI.Areas.Administration.Controllers
         {
             if (!string.IsNullOrEmpty(thumbnail))
             {
-                Image img = AttachmentOperations.FromBase64(thumbnail);
+                var img = AttachmentOperations.FromBase64(thumbnail);
                 site.Logo = img.Save(_hostingEnvironment, site.Title, Enums.AttachmentType.Site);
             }
 
             _service.AddEditSetting(site);
             SetMessage(MessageType.Success, "Ayarlar Başarıyla Kaydedildi");
-            return RedirectToAction("Index");
+            return RedirectToAction("Settings");
         }
 
     }

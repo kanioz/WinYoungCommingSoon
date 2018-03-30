@@ -1,18 +1,15 @@
-﻿@using WinYoungUI.Extensions
-@model WinYoungUI.Models.Entities.SiteSetting
-@inject Microsoft.AspNetCore.Hosting.IHostingEnvironment hostingEnv
-@{
-    ViewBag.Title = "Ayarlar";
+﻿@{
+    ViewBag.Title = "Profil";
 }
 <div class="box">
     <div class="box-header with-border">
         <div class="box box-primary">
             <div class="box-header">
-                <h2>Site Ayarları</h2>
+                <h2>Profil</h2>
             </div>
             <div class="box-body">
                 <form role="form" method="POST">
-                    @Html.HiddenFor(t => t.Id)
+                    @*@Html.HiddenFor(t => t.Id)
                     <input type="hidden" name="thumbnail" id="thumbnail" />
 
                     <div class="col-md-12">
@@ -83,7 +80,7 @@
                         <div class="col-md-12">
                             <button style="width: 200px" class="pull-right btn btn-block btn-primary btn-lg">Kaydet</button>
                         </div>
-                    </div>
+                    </div>*@
                 </form>
             </div>
         </div>
@@ -101,10 +98,10 @@
     <script src="~/Areas/Administration/Content/plugins/tagsinput/bootstrap-tagsinput.min.js"></script>
     <script>
         $(document).ready(function () {
-            $('#MetaKeys').tagsinput({
+            @*$('#MetaKeys').tagsinput({
                 items: '@Model.MetaKey',
                 tagClass: 'label label-primary'
-            });
+            });*@
             $(".bootstrap-tagsinput").addClass('col-md-12');
 
 

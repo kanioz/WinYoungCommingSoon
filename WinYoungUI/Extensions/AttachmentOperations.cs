@@ -95,10 +95,9 @@ namespace WinYoungUI.Extensions
         public static string Save(this Image image, Microsoft.AspNetCore.Hosting.IHostingEnvironment hostingEnv, string fileName, Enums.AttachmentType imageType)
         {
             var folderName = GetFolderName(imageType);
-            var folderPath = @"Content\Uploads";
             var fileNameExt = string.Format("{0}_{1}.jpg", fileName, DateTime.Now.Millisecond);
-            var path = Path.Combine(hostingEnv.WebRootPath, folderPath, folderName, fileNameExt);
-            image.Save(path);
+            var filePath = Path.Combine($"{hostingEnv.WebRootPath}\\Content\\Uploads\\{folderName}\\{fileNameExt}");
+            image.Save(filePath);
             return fileNameExt;
         }
 

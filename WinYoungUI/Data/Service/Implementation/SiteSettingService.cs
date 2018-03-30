@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using WinYoungUI.Data.Repository;
 using WinYoungUI.Data.Service.Abstract;
 using WinYoungUI.Data.Service.Interface;
