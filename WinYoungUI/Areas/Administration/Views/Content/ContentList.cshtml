@@ -1,0 +1,49 @@
+﻿@model System.Collections.Generic.List<WinYoungUI.Models.Entities.Content>
+
+<div class="box">
+    <div class="box-header with-border">
+        <h3 class="box-title">İçerik Listesi</h3>
+    </div>
+    <div class="box-body">
+        <table id="dataTable" class="table table-responsive table-hover">
+            <thead>
+                <tr>
+                    <td>İçerik Başlığı</td>
+                    <td>Kategori</td>
+                    <td>Etiketler</td>
+                    <td>Açıklama</td>
+                    <td>Aktiflik</td>
+                    <td>Oluşturulma Tarihi</td>
+                    <td>İşlemler</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var content in Model)
+                {
+                    <tr>
+                        <td>@content.Title</td>
+                        <td>@content.Category.Title</td>
+                        <td>@content.MetaTags</td>
+                        <td>@content.Description</td>
+                        <td>@(content.IsActive ? "Aktif" : "Pasif")</td>
+                        <td>@content.CreateTime</td>
+                        <td class="input-group-btn">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">İşlemler <span class="fa fa-caret-down"></span></button>
+                            <ul class="dropdown-menu pull-right">
+                                <li><a href="@Url.Action("ContentEdit", "Content", new { id = content.Id })"><i class="fa fa-edit"></i>Düzenle</a></li>
+                                <li><a onclick="return confirm('Silmek istediğinizden emin misiniz?')" href="@Url.Action("ContentDelete", "Content", new { id = content.Id })"><i class=" fa fa-eraser"></i>Sil</a></li>
+                            </ul>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div><!-- /.box-body -->
+    <div class="box-footer">
+        Footer
+    </div><!-- /.box-footer-->
+</div><!-- /.box -->
+@section PageScripts
+    {
+    @Html.Partial("Plugins/DataTable")
+}

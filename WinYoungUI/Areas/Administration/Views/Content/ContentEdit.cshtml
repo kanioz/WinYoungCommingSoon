@@ -1,0 +1,121 @@
+﻿@using WinYoungUI.Extensions
+@model WinYoungUI.Models.Entities.Content
+@inject Microsoft.AspNetCore.Hosting.IHostingEnvironment hostingEnv
+
+<div class="box">
+    <div class="box-header with-border">
+        <div class="box box-primary">
+            <div class="box-header">
+                <h2>@(Model.Id == 0 ? "Yeni İçerik" : (Model.Title))</h2>
+                <h3 class="box-title">@(Model.Id == 0 ? "Yeni İçerik Ekle" : (Model.Title))</h3>
+            </div>
+            <div class="box-body">
+
+                <form role="form" method="POST">
+                    @Html.HiddenFor(t => t.Id)
+                    <input type="hidden" name="thumbnail" id="thumbnail" />
+                    <div class="col-md-6">
+
+                        <div class="form-group">
+                            <label for="Title">İçerik Başlığı</label>
+                            @Html.TextBoxFor(t => t.Title, new { @class = "form-control", placeholder = "İçerik Başlığı", @required = true, @oninvalid = "this.setCustomValidity('Lütfen \"İçerik Başlığı\" alanını giriniz.')", @oninput = "setCustomValidity('')" })
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="thumb" class="col-md-12">Resim Dosyası</label>
+                                <div class="controls">
+                                    <img style="width:100px;height:100px;" src="@AttachmentOperations.GetImageLocation(hostingEnv, Model.ThumbnailUrl, Enums.AttachmentType.Content)" id="imgShow"><br>
+                                    <input name="ContentImage" type="file" id="pageimg">
+                                    <input name="thumbnail" id="thumbnail" type="hidden" value="" />
+                                </div>
+                                @*<div class="dropzone" data-image="@ImageOperations.GetImageLocation(Model.ThumbnailUrl, AttachmentType.Content)" data-width="@ConfigurationManager.AppSettings["ContentImageSize"].Split(',')[0]" data-ajax="false" data-download="true" data-height="@ConfigurationManager.AppSettings["AvatarSize"].Split(',')[1]">
+                                        <input type="file" name="thumb" />
+                                    </div>*@
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="Description">Kategori</label>
+                            @Html.DropDownListFor(m => m.Category.Id, (SelectList)ViewBag.AllCategories, "Kategori Seçiniz", new { @class = "form-control", @placeholder = "Ait olacağı kategoriyi seçin...", @required = true, @oninvalid = "this.setCustomValidity('Lütfen \"Üst Kategori\" seçiniz.')", @oninput = "setCustomValidity('')" })
+                        </div>
+                        <div class="form-group">
+                            <label for="Description">Tanım</label>
+                            @Html.TextAreaFor(t => t.Description, new { @class = "form-control", placeholder = "Tanım", @required = true, @oninvalid = "this.setCustomValidity('Lütfen \"Tanım\" alanını giriniz.')", @oninput = "setCustomValidity('')" })
+                        </div>
+
+                        <div class="form-group">
+                            <label for="MetaTags">Etiketler</label>
+                            @Html.TextBoxFor(t => t.MetaTags, new { @class = "form-control", placeholder = "Etiketler", @required = true, @oninvalid = "this.setCustomValidity('Lütfen \"Etiketler\" alanını giriniz.')", @oninput = "setCustomValidity('')" })
+                        </div>
+                        <div class="form-group">
+                            @Html.CheckBoxFor(t => t.IsActive)
+                            <label for="IsActive">
+                                Aktif İçerik
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            @Html.CheckBoxFor(t => t.IsSlider)
+                            <label for="IsSlider">
+                                Slide Alanında Göster?
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="Text">İçerik</label>
+                            @Html.TextAreaFor(t => t.Text, new { @class = "form-control", placeholder = "İçerik" })
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <button style="width: 200px" class="btn btn-block btn-primary btn-lg">Kaydet</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@section PageScripts
+    {
+    <!-- InputMask -->
+    <script src="~/Areas/Administration/Content/plugins/input-mask/jquery.inputmask.js" type="text/javascript"></script>
+    <script src="~/Areas/Administration/Content/plugins/input-mask/jquery.inputmask.date.extensions.js" type="text/javascript"></script>
+    <script src="~/Areas/Administration/Content/plugins/input-mask/jquery.inputmask.extensions.js" type="text/javascript"></script>
+
+    <script src="~/Areas/Administration/Content/plugins/tagsinput/bootstrap-tagsinput.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".datemask").inputmask("dd/mm/yyyy", { "placeholder": "dd/mm/yyyy" });
+            $('#MetaTags').tagsinput({
+                items: '@Model.MetaTags',
+                tagClass: 'label label-primary'
+            });
+            $(".bootstrap-tagsinput").addClass('col-md-12');
+            function readURL(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $('#imgShow').attr('src', e.target.result);
+                        $('#thumbnail').val(e.target.result);
+                    }
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+            $("#pageimg").change(function () {
+                readURL(this);
+            });
+
+        });
+
+    </script>
+    @Html.Partial("Plugins/CkEditor", "Text")
+    @Html.Partial("Plugins/ImageUploader")
+
+}
+@section PageStyles
+    {
+    <link href="~/Areas/Administration/Content/plugins/tagsinput/bootstrap-tagsinput.css" rel="stylesheet" />
+}

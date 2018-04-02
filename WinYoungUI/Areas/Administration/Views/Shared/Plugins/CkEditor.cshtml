@@ -1,14 +1,15 @@
 ﻿@model string
-<script src="~/Areas/Administration/Content/plugins/ckeditor/ckeditor.js"></script>
-<script src="/content/ckfinder/ckfinder.js"></script>
+<script src="~/Content/plugins/ckeditor/ckeditor.js"></script>
+<script src="~/Content/plugins/ckfinder/ckfinder.js"></script>
+
 <script>
     $(document).ready(function () {
         CKEDITOR.replace("@Model", {
             enterMode: CKEDITOR.ENTER_BR,
-            filebrowserBrowseUrl: '/content/ckfinder/ckfinder.html',
-            filebrowserImageBrowseUrl: '/content/ckfinder/ckfinder.html?type=Images',
-            filebrowserUploadUrl: '/content/ckfinder/connector?command=QuickUpload&type=Files',
-            filebrowserImageUploadUrl: '/content/ckfinder/connector?command=QuickUpload&type=Images'
+            filebrowserBrowseUrl: '/Content/plugins/ckfinder/ckfinder.html',
+            filebrowserImageBrowseUrl: '/Content/plugins/ckfinder/ckfinder.html?type=Images',
+            filebrowserUploadUrl: '/Content/plugins/ckfinder/connector?command=QuickUpload&type=Files',
+            filebrowserImageUploadUrl: '/Content/plugins/ckfinder/connector?command=QuickUpload&type=Images'
         });
         CKEDITOR.skinName = 'moonocolor';
         CKEDITOR.language = 'tr';

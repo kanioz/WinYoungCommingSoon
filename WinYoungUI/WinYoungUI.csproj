@@ -5,10 +5,22 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\Areas\Administration\Content\plugins\ckfinder\**" />
     <Compile Remove="wwwroot\Content\Uploads\**" />
+    <Content Remove="wwwroot\Areas\Administration\Content\plugins\ckfinder\**" />
     <Content Remove="wwwroot\Content\Uploads\**" />
+    <EmbeddedResource Remove="wwwroot\Areas\Administration\Content\plugins\ckfinder\**" />
     <EmbeddedResource Remove="wwwroot\Content\Uploads\**" />
+    <None Remove="wwwroot\Areas\Administration\Content\plugins\ckfinder\**" />
     <None Remove="wwwroot\Content\Uploads\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Areas\Administration\Views\Content\ContentList.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Areas\Administration\Views\Content\ContentList.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,10 +38,11 @@
     <Folder Include="Areas\Administration\Data\" />
     <Folder Include="wwwroot\Areas\Administration\Content\css\" />
     <Folder Include="Views\Shared\" />
-    <Folder Include="wwwroot\Content\" />
+    <Folder Include="wwwroot\Content\images\" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Areas\Administration\Views\Content\ContentList.cshtml" />
     <None Include="wwwroot\Areas\Administration\Content\bootstrap\css\bootstrap.css" />
     <None Include="wwwroot\Areas\Administration\Content\bootstrap\css\bootstrap.css.map" />
     <None Include="wwwroot\Areas\Administration\Content\bootstrap\css\bootstrap.min.css" />
