@@ -13,6 +13,9 @@ namespace WinYoungUI.Models
 
         public DbSet<NewsLetter> NewsLetters { get; set; }
         public DbSet<SiteSetting> SiteSettings { get; set; }
+        public DbSet<Content> Contents { get; set; }
+        public DbSet<ContentCategory> ContentCategories { get; set; }
+
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
