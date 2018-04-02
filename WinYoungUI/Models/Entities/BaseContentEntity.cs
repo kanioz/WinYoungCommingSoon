@@ -20,5 +20,6 @@ namespace WinYoungUI.Models.Entities
         public int OrderValue { get; set; }
         public int ViewCount { get; set; }
         public string ThumbnailUrl { get; set; }
+        public bool IsActive { get; set; }
     }
 }

@@ -1,0 +1,117 @@
+﻿@using Microsoft.IdentityModel.Protocols
+@using WinYoungUI.Extensions
+@model WinYoungUI.Models.Entities.ContentCategory
+@inject Microsoft.AspNetCore.Hosting.IHostingEnvironment hostingEnv
+
+<div class="box">
+    <div class="box-header with-border">
+        <div class="box box-primary">
+            <div class="box-header">
+                <h2>@(Model.Id == 0 ? "Yeni İçerik Kategorisi" : (Model.Title))</h2>
+                <h3 class="box-title">@(Model.Id == 0 ? "Yeni İçerik Kategorisi Ekle" : (Model.Title))</h3>
+            </div>
+            <div class="box-body">
+                <form role="form" id="postForm" method="POST">
+                    @Html.HiddenFor(t => t.Id)
+                    <input type="hidden" name="thumbnail" id="thumbnail" />
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="Title">Kategori Başlığı</label>
+                            @Html.TextBoxFor(t => t.Title, new { @class = "form-control", placeholder = "Kategori Başlığı", @required = true, @oninvalid = "this.setCustomValidity('Lütfen \"Kategori Başlığı\" alanını giriniz.')", @oninput = "setCustomValidity('')" })
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="thumb" class="col-md-12">Resim Dosyası</label>
+                                <div class="dropzone" data-image="@AttachmentOperations.GetImageLocation(hostingEnv,Model.ThumbnailUrl, Enums.AttachmentType.ContentCategory)" data-width="@Store.CategoryImageSize.Split(',')[0]" data-ajax="false" data-download="true" data-height="@Store.CategoryImageSize.Split(',')[1]">
+                                    <input type="file" name="thumb" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="Description">Üst Kategori</label>4
+                            @Html.DropDownListFor(m => m.RootCategory.Id, (SelectList)ViewBag.AllCategories, "Üst Kategori Seçiniz", new { @class = "form-control", @placeholder = "Ait olacağı kategoriyi seçin..." })
+                        </div>
+                        <div class="form-group">
+                            <label for="Description">Tanım</label>
+                            @Html.TextAreaFor(t => t.Description, new { @class = "form-control", placeholder = "Tanım", @required = true, @oninvalid = "this.setCustomValidity('Lütfen \"Tanım\" alanını giriniz.')", @oninput = "setCustomValidity('')" })
+                        </div>
+
+                        <div class="form-group">
+                            <label for="MetaTags">Etiketler</label>
+                            @Html.TextBoxFor(t => t.MetaTags, new { @class = "form-control", placeholder = "Etiketler" })
+                        </div>
+                        <div class="form-group">
+                            @Html.CheckBoxFor(t => t.IsActive)
+                            <label for="IsActive">
+                                Aktif Kategori
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="Text">İçerik</label>
+                            @Html.TextAreaFor(t => t.Text, new { @class = "form-control", placeholder = "Kategori Başlığı" })
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <button style="width: 200px" class="btn btn-block btn-primary btn-lg">Kaydet</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@section PageScripts
+    {
+    <!-- InputMask -->
+    <script src="/Areas/Administration/Content/plugins/input-mask/jquery.inputmask.js" type="text/javascript"></script>
+    <script src="/Areas/Administration/Content/plugins/input-mask/jquery.inputmask.date.extensions.js" type="text/javascript"></script>
+    <script src="/Areas/Administration/Content/plugins/input-mask/jquery.inputmask.extensions.js" type="text/javascript"></script>
+    <script src="http://underscorejs.org/underscore-min.js" type="text/javascript"></script>
+
+
+    <script src="~/Areas/Administration/Content/plugins/tagsinput/bootstrap-tagsinput.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".datemask").inputmask("dd/mm/yyyy", { "placeholder": "dd/mm/yyyy" });
+            $('#MetaTags').tagsinput({
+                items: '@Model.MetaTags',
+                tagClass: 'label label-primary'
+            });
+            $(".bootstrap-tagsinput").addClass('col-md-12');
+            $('#Title').keypress(_.debounce(function () {
+                $.get('@Url.Action("GetSeoUrl")/?SeoUrl=' + $(this).val(), function (data) {
+                    $('#CustomUrl').val(data);
+                });
+            }, 500));
+            $('#postForm').submit(function () {
+                var returnValue = true;
+                try {
+                    jQuery.ajax({
+                        url: '@Url.Action("IsLinkExist")/?SeoUrl=' + $('#CustomUrl').val(),
+                        success: function (data) {
+                            if (data)
+                                returnValue = confirm("Bu link sistemde mevcut");
+                        },
+                        async: false
+                    });
+                }
+                catch (err) {
+                    return false;
+                }
+                return returnValue;
+            });
+        });
+    </script>
+    @Html.Partial("Plugins/CkEditor", "Text")
+    @Html.Partial("Plugins/ImageUploader")
+}
+@section PageStyles
+    {
+    <link href="~/Areas/Administration/Content/plugins/tagsinput/bootstrap-tagsinput.css" rel="stylesheet" />
+}

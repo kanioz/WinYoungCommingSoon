@@ -46,6 +46,8 @@ namespace WinYoungUI
             services.AddScoped<IDbInitializer, DbInitializer>();
             services.AddScoped<INewsLetterService, NewsLetterService>();
             services.AddScoped<ISiteSettingService, SiteSettingService>();
+            services.AddScoped<IContentService, ContentService>();
+            services.AddScoped<IContentCategoryService, ContentCategoryService>();
 
             services.ConfigureApplicationCookie(options =>
             {

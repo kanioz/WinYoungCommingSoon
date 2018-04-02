@@ -1,0 +1,50 @@
+﻿@model System.Collections.Generic.List<WinYoungUI.Models.Entities.ContentCategory>
+<div class="box">
+    <div class="box-header with-border">
+        <h3 class="box-title">İçerik Kategorileri</h3>
+        @*<div class="box-tools pull-right">
+                <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse"><i class="fa fa-minus"></i></button>
+                <button class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove"><i class="fa fa-times"></i></button>
+            </div>*@
+    </div>
+    <div class="box-body">
+        <table id="dataTable" class="table table-responsive table-hover">
+            <thead>
+                <tr>
+                    <td>Ana Kategori</td>
+                    <td>Kategori Başlığı</td>
+                    <td>Etiketler</td>
+                    <td>Açıklama</td>
+                    <td>Aktiflik</td>
+                    <td>İşlemler</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var contentCategory in Model)
+                {
+                    <tr>
+                        <td>@(contentCategory.RootCategory == null ? "Ana Kategori" : (contentCategory.RootCategory.Title))</td>
+                        <td>@contentCategory.Title</td>
+                        <td>@contentCategory.MetaTags</td>
+                        <td>@contentCategory.Description</td>
+                        <td>@(contentCategory.IsActive ? "Aktif" : "Pasif")</td>
+                        <td class="input-group-btn">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">İşlemler <span class="fa fa-caret-down"></span></button>
+                            <ul class="dropdown-menu pull-right">
+                                <li><a href="@Url.Action("CategoryEdit", "Content", new { id = contentCategory.Id })"><i class="fa fa-edit"></i>Düzenle</a></li>
+                                <li><a onclick="return confirm('Silmek istediğinizden emin misiniz?')" href="@Url.Action("CategoryDelete", "Content", new { id = contentCategory.Id })"><i class=" fa fa-eraser"></i>Sil</a></li>
+                            </ul>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div><!-- /.box-body -->
+    <div class="box-footer">
+        Footer
+    </div><!-- /.box-footer-->
+</div><!-- /.box -->
+@section PageScripts
+    {
+    @Html.Partial("Plugins/DataTable")
+}
